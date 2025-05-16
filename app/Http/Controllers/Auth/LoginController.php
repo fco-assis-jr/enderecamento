@@ -34,7 +34,7 @@ class LoginController extends Controller
         }
 
         $temAcesso = DB::connection('oracle')->table('PCCONTRO')
-            ->where('codrotina', 409)
+            //->where('codrotina', 409)
             ->where('acesso', 'S')
             ->where('codusuario', $user->matricula)
             ->exists();
@@ -48,60 +48,6 @@ class LoginController extends Controller
         Auth::guard('oracle')->login($user);
 
         return redirect()->route('home');
-    }
-
-    public function winthor(Request $request)
-    {
-        $terminal = strtoupper($request->query('terminal'));
-
-        $sql = /** @lang text */
-            "
-        SELECT *
-        FROM PCEMPR e
-        WHERE e.MATRICULA IN (
-            SELECT codusuario
-            FROM PCCONTRO
-            WHERE codrotina = 409
-              AND acesso = 'S'
-              AND TO_CHAR(codusuario) IN (
-                SELECT TO_CHAR(p.action)
-                FROM V\$SESSION p
-                WHERE p.terminal = ?
-                  AND p.action IS NOT NULL
-                  AND EXISTS (
-                      SELECT 1
-                      FROM PCEMPR
-                      WHERE TO_CHAR(matricula) = TO_CHAR(p.action)
-                      AND ROWNUM = 1
-                  )
-              )
-        )
-        AND e.SITUACAO = 'A'
-        AND ROWNUM = 1
-    ";
-
-        try {
-            $usuarios = Pcempr::fromQuery($sql, [$terminal]);
-            $usuario = $usuarios[0] ?? null;
-
-            if (!$usuario) {
-
-                return redirect()->route('login');
-            }
-
-            Auth::guard('oracle')->login($usuario);
-            Log::info('Redirecionando para dashboard após login via terminal.');
-            return redirect()->route('home');
-
-        } catch (\Throwable $e) {
-            Log::error('Erro ao executar login do terminal', [
-                'terminal' => $terminal,
-                'exception' => $e->getMessage(),
-            ]);
-
-            return redirect()->route('login');
-
-        }
     }
 
     public function logout(Request $request)

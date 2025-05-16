@@ -53,7 +53,7 @@ class CadastroController extends Controller
         return response()->json($produto);
     }
 
-    public function atualizarEndereco(Request $request)
+    public function validarEndereco(Request $request)
     {
         $codprod = $request->codprod;
         $novo = $request->endereco;

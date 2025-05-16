@@ -21,9 +21,6 @@ Route::get('/login', fn() => Inertia::render('login'))->name('login');
 // Envio do formulário de login
 Route::post('/login', [LoginController::class, 'login'])->name('login.post');
 
-//Login Winthor
-Route::get('/winthor', [LoginController::class, 'winthor'])->name('winthor');
-
 
 /*
 |--------------------------------------------------------------------------
@@ -46,7 +43,7 @@ Route::middleware('auth:oracle')->group(function () {
         Route::get('/buscar', [CadastroController::class, 'buscarProduto']);
 
         // Atualiza o endereço (com validação de regras)
-        Route::post('/endereco/validar', [CadastroController::class, 'atualizarEndereco']);
+        Route::post('/endereco/validar', [CadastroController::class, 'validarEndereco']);
 
         // Confirma a sobrescrita e executa alteração
         Route::post('/endereco/sobrescrever', [CadastroController::class, 'sobrescreverEndereco']);

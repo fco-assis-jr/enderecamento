@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { usePage } from '@inertiajs/react';
 import axios from 'axios';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -41,6 +42,8 @@ export default function ConsultaProduto() {
     const [editando, setEditando] = useState(false);
     const [confirmarSobrescrever, setConfirmarSobrescrever] = useState(false);
     const [produtosEmConflito, setProdutosEmConflito] = useState<{ codprod: number; descricao: string }[]>([]);
+    const { props: pageProps } = usePage<{ auth: { user: { matricula: string; nome: string } } }>();
+    const user = pageProps.auth.user;
 
     const [novoEndereco, setNovoEndereco] = useState({
         rua: produto?.RUA || '',
@@ -170,32 +173,54 @@ export default function ConsultaProduto() {
     };
     return (
         <div className="bg-muted/50 mx-auto mt-0 max-w-5xl space-y-6 rounded-xl p-4">
-        <h2 className="text-xl font-semibold text-center sm:text-left">Dados Logisticos</h2>
-
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 bg-white/10 p-3 rounded-md shadow-inner">
-            <div className="relative w-full max-w-sm mx-auto">
-                <Input
-                    id="busca"
-                    type="number"
-                    className="bg-background/80 placeholder:text-muted-foreground focus:ring-primary w-full rounded-md border border-white/30 text-base text-white ring-1 ring-white/20 focus:ring-2 pr-10"
-                    placeholder="Código Produto"
-                    value={busca}
-                    onChange={(e) => setBusca(e.target.value)}
-                    onKeyDown={(e) => e.key === 'Enter' && buscarProduto()}
-                />
-                <Button
-                    onClick={buscarProduto}
-                    disabled={carregando}
-                    className="absolute top-1/2 right-1 -translate-y-1/2 p-1 text-white"
-                    size="icon"
-                    variant="ghost"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z" />
+            <div className="flex items-center justify-between">
+                <a href="/logout" className="text-white transition hover:text-red-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
-                </Button>
+                </a>
+                <h2 className="flex-1 text-center text-xl font-semibold sm:text-left">Dados Logísticos</h2>
+                <div className="ml-2 text-right text-[9px] leading-none font-medium text-white">
+                    <div>{user.matricula}</div>
+                    <div>{user.nome.split(' ')[0]}</div>
+                </div>
             </div>
-        </div>
+
+            <div className="flex flex-col gap-2 rounded-md bg-white/10 p-3 shadow-inner sm:flex-row sm:items-center sm:justify-between">
+                <div className="relative mx-auto w-full max-w-sm">
+                    <Input
+                        id="busca"
+                        type="number"
+                        className="bg-background/80 placeholder:text-muted-foreground focus:ring-primary w-full rounded-md border border-white/30 pr-10 text-base text-white ring-1 ring-white/20 focus:ring-2"
+                        placeholder="Código Produto"
+                        value={busca}
+                        onChange={(e) => setBusca(e.target.value)}
+                        onKeyDown={(e) => e.key === 'Enter' && buscarProduto()}
+                    />
+                    <Button
+                        onClick={buscarProduto}
+                        disabled={carregando}
+                        className="absolute top-1/2 right-1 -translate-y-1/2 p-1 text-white"
+                        size="icon"
+                        variant="ghost"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="h-4 w-4"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z"
+                            />
+                        </svg>
+                    </Button>
+                </div>
+            </div>
             {produto && (
                 <div className="mt-4 space-y-3 border-t pt-4 font-mono text-lg">
                     {/* Título com quebra para nomes grandes */}

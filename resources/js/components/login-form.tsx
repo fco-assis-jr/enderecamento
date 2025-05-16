@@ -72,7 +72,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
                 <div className="relative">
                   <Input
                     id="senha"
-                    type={showPassword ? "text" : "password"}
+                    type='text'
                     value={data.senha}
                     onChange={(e) => setData("senha", e.target.value)}
                     required

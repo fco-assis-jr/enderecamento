@@ -331,11 +331,8 @@ export default function ConsultaProduto() {
                         {!editando ? (
                             <>
                                 <h3 className="text-lg font-semibold">Ações do Endereço</h3>
-                                <p className="text-muted-foreground text-sm">Deseja editar ou apagar este endereço?</p>
+                                <p className="text-muted-foreground text-sm">Deseja editar este endereço?</p>
                                 <div className="mt-4 flex justify-end gap-2">
-                                    <Button variant="destructive" onClick={() => alert('Melhor Não!')}>
-                                        Apagar
-                                    </Button>
                                     <Button variant="default" onClick={() => setEditando(true)}>
                                         Editar
                                     </Button>

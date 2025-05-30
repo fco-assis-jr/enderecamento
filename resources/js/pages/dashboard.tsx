@@ -281,6 +281,12 @@ export default function ConsultaProduto() {
                         </span>
                         <span>{produto.QTUNITCX}</span>
                     </div>
+                    <div className="mb-1 flex justify-between border-b border-white/20 pb-2">
+                        <span>
+                            <strong>FORA DE LINHA</strong>
+                        </span>
+                        <span>{produto.OBS2}</span>
+                    </div>
 
                     {/* Endereço como tabela */}
                     <div className="mt-4 overflow-auto">

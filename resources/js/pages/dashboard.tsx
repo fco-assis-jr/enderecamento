@@ -175,15 +175,48 @@ export default function ConsultaProduto() {
             }
         }
     };
+    // Obtém o caminho atual para destacar o item de menu ativo sem erros em SSR
+    const pathname = typeof window !== 'undefined' ? window.location.pathname : '';
     return (
         <div className="bg-muted/50 mx-auto mt-0 max-w-5xl space-y-6 rounded-xl p-4">
+            {/* Cabeçalho com menu de navegação */}
             <div className="flex items-center justify-between">
+                {/* Ícone de logout permanece como na versão original */}
                 <a href="/logout" className="text-white transition hover:text-red-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
                 </a>
-                <h2 className="flex-1 text-center text-xl font-semibold sm:text-left">Dados Logísticos</h2>
+                {/* Navegação entre telas */}
+                <nav className="flex flex-1 justify-center space-x-4">
+                    <a
+                        href="/home"
+                        className={`${
+                            pathname === '/home'
+                                ? 'font-semibold text-white border-b border-white'
+                                : 'text-white/70'
+                        } px-2 py-1`}
+                    >
+                        Dados Logísticos
+                    </a>
+                    <a
+                        href="/precos"
+                        className={`${
+                            pathname === '/precos'
+                                ? 'font-semibold text-white border-b border-white'
+                                : 'text-white/70'
+                        } px-2 py-1`}
+                    >
+                        Dados do Produto
+                    </a>
+                </nav>
+                {/* Informações do usuário */}
                 <div className="ml-2 text-right text-[9px] leading-none font-medium text-white">
                     <div>{user.matricula}</div>
                     <div>{user.nome.split(' ')[0]}</div>

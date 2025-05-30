@@ -69,6 +69,7 @@ export default function ConsultaProduto() {
             if (!response.data) {
                 toast.warning('Produto não encontrado.');
                 setProduto(null);
+                setBusca("")
             } else {
                 setBusca("")
                 const dados = response.data;
@@ -103,6 +104,7 @@ export default function ConsultaProduto() {
                 setProduto(formatado);
             }
         } catch (error: unknown) {
+            setBusca("")
             if (axios.isAxiosError(error) && error.response?.data?.mensagem) {
                 toast.error('Erro ao buscar produto', {
                     description: error.response.data.mensagem,
@@ -114,6 +116,7 @@ export default function ConsultaProduto() {
             }
             setProduto(null);
         } finally {
+            setBusca("")
             setCarregando(false);
         }
     };

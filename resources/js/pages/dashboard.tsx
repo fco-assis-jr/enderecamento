@@ -70,6 +70,7 @@ export default function ConsultaProduto() {
                 toast.warning('Produto não encontrado.');
                 setProduto(null);
             } else {
+                setBusca("")
                 const dados = response.data;
 
                 const formatado: Produto = {

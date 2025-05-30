@@ -314,12 +314,12 @@ export default function ConsultaProduto() {
 
                     {/* Estoque */}
                     <div className="flex justify-between border-t pt-3 text-[15px] font-semibold">
-                        <span>Estoque Disp.</span>
+                        <span>Estoque em Unidade.</span>
                         <span>{isNaN(produto.QTEST) ? '0,00' : produto.QTEST.toLocaleString('pt-BR')}</span>
                     </div>
 
                     <div className="flex justify-between text-[15px] font-semibold">
-                        <span>Estoque Adm.</span>
+                        <span>Estoque em Caixa.</span>
                         <span>{isNaN(produto.QTESTGER) ? '0,00' : produto.QTESTGER.toLocaleString('pt-BR')}</span>
                     </div>
                 </div>

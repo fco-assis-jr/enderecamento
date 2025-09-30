@@ -115,12 +115,15 @@ export default function Precos() {
             if (!res.data.produto) {
                 toast.warning('Produto não encontrado.');
             }
+
         } catch (error) {
             toast.error('Erro ao buscar dados do produto.');
             setProduto(null);
             setOfertas([]);
         } finally {
             setCarregando(false);
+            setEan('');
+
         }
     };
 
@@ -205,6 +208,7 @@ export default function Precos() {
                     {/* Campo EAN com botão de busca sobreposto, semelhante à tela de logística */}
                     <div className="relative w-full sm:flex-1">
                         <Input
+
                             type="number"
                             placeholder="EAN"
                             value={ean}

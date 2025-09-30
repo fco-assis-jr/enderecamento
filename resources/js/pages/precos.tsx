@@ -247,45 +247,10 @@ export default function Precos() {
                     <div className="text-xl font-bold tracking-tight break-words text-white uppercase">
                         {produto.codprod} - {produto.descricao}
                     </div>
-                    {/* Linha de informações básicas */}
-                    <div className="mb-1 flex justify-between border-b border-white/20 pb-2">
-                        <span>
-                            <strong>EAN</strong>
-                        </span>
-                        <span>{produto.codauxiliar}</span>
-                    </div>
-                    <div className="mb-1 flex justify-between border-b border-white/20 pb-2">
-                        <span>
-                            <strong>Unidade</strong>
-                        </span>
-                        <span>{produto.unidade}</span>
-                    </div>
-                    <div className="mb-1 flex justify-between border-b border-white/20 pb-2">
-                        <span>
-                            <strong>Embalagem</strong>
-                        </span>
-                        <span>{produto.embalagem}</span>
-                    </div>
-                    <div className="mb-1 flex justify-between border-b border-white/20 pb-2">
-                        <span>
-                            <strong>Quantidade por Unidade</strong>
-                        </span>
-                        <span>{produto.qtunit}</span>
-                    </div>
                     {/* Preços de venda */}
                     <div className="flex justify-between border-t pt-3 text-[28px] font-semibold">
                         <span>Preço Venda </span>
                         <span>{produto.pvenda.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
-                    </div>
-
-                    {/* Estoque */}
-                    <div className="flex justify-between border-t pt-3 text-[15px] font-semibold">
-                        <span>Estoque  Disponivel Unid.</span>
-                        <span>{produto.qtestoquedisponivel.toLocaleString('pt-BR')}</span>
-                    </div>
-                    <div className="flex justify-between text-[15px] font-semibold">
-                        <span>Estoque Master</span>
-                        <span>{produto.estoquemaster}</span>
                     </div>
                     {/* Se houver oferta ativa */}
                     {ofertaAtiva && (
@@ -312,6 +277,41 @@ export default function Precos() {
                             )}
                         </div>
                     )}
+                    {/* Linha de informações básicas */}
+                    <div className="mb-1 flex justify-between border-b border-white/20 pb-2">
+                        <span>
+                            <strong>EAN</strong>
+                        </span>
+                        <span>{produto.codauxiliar}</span>
+                    </div>
+                    <div className="mb-1 flex justify-between border-b border-white/20 pb-2">
+                        <span>
+                            <strong>Unidade</strong>
+                        </span>
+                        <span>{produto.unidade}</span>
+                    </div>
+                    <div className="mb-1 flex justify-between border-b border-white/20 pb-2">
+                        <span>
+                            <strong>Embalagem</strong>
+                        </span>
+                        <span>{produto.embalagem}</span>
+                    </div>
+                    <div className="mb-1 flex justify-between border-b border-white/20 pb-2">
+                        <span>
+                            <strong>Quantidade por Unidade</strong>
+                        </span>
+                        <span>{produto.qtunit}</span>
+                    </div>
+                    {/* Estoque */}
+                    <div className="flex justify-between border-t pt-3 text-[15px] font-semibold">
+                        <span>Estoque  Disponivel Unid.</span>
+                        <span>{produto.qtestoquedisponivel.toLocaleString('pt-BR')}</span>
+                    </div>
+                    <div className="flex justify-between text-[15px] font-semibold">
+                        <span>Estoque Master</span>
+                        <span>{produto.estoquemaster}</span>
+                    </div>
+
                 </div>
             )}
         </div>
